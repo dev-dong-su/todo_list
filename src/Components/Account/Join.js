@@ -1,23 +1,22 @@
-import { useState } from 'react';
 import Input from '../common/Input';
 import Button from '../common/Button';
 import tw from 'tailwind-styled-components';
+import useInput from '../../hooks/useInput';
 
-const Container = tw.div`flex flex-col w-10/12 h-full justify-center items-center rounded-xl`;
+const Container = tw.div`flex flex-col w-10/12 h-full justify-center items-center rounded-xl gap-4`;
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [pwd, setPwd] = useState('');
-  const [pwdCheck, setPwdCheck] = useState('');
+  const form = {
+    email: useInput(''),
+    password: useInput(''),
+    pwdCheck: useInput(''),
+  };
 
   return (
     <Container>
-      <Input type='text' label='Name' value={name} name='이름' handleValue={e => setName(e.target.value)} />
-      <Input type='text' label='Email' value={email} name='e-mail' handleValue={e => setEmail(e.target.value)} />
-      <Input type='password' label='Password' value={pwd} name='비밀번호' handleValue={e => setPwd(e.target.value)} />
-      <Input type='password' label='Password Check' name='비밀번호 확인' value={pwdCheck}
-             handleValue={e => setPwdCheck(e.target.value)} />
+      <Input type='text' label='Email' {...form.email} />
+      <Input type='password' label='Password' {...form.password} />
+      <Input type='password' label='Password Check' {...form.pwdCheck} />
       <Button to='/' className={'mt-1 bg-rose-400 text-white shadow-md mx-auto'}>Join</Button>
     </Container>);
 };
