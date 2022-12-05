@@ -1,14 +1,16 @@
 import { useState } from 'react';
 
-const useInput = (initialValue) => {
+const useInput = ({initialValue, errorMessage, pattern}) => {
   const [value, setValue] = useState(initialValue);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setValue((pre) => pre = event.target.value);
   };
 
   return {
     value,
+    errorMessage,
+    pattern,
     onChange: handleChange,
   };
 };
