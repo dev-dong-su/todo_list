@@ -8,7 +8,6 @@ import { login } from '../../apis/auth';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
 
-
 const Container = tw.form`flex flex-col w-10/12 h-full justify-center pb-10 items-center rounded-xl gap-4`;
 
 const Login = () => {
@@ -31,14 +30,14 @@ const Login = () => {
 
   const { setValue } = useLocalStorage('access_token');
 
-  const action = (response) => {
+  const action = response => {
     setValue(response.data['access_token']);
     navigate('/todo');
   };
 
   const { handleRequest } = useRequest();
 
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = event => {
     event.preventDefault();
     handleRequest({
       submitFunction: login,
@@ -49,10 +48,15 @@ const Login = () => {
 
   return (
     <Container onSubmit={handleOnSubmit}>
-      <Input type='email' label='Email' {...form.email} />
-      <Input type='password' label='Password' {...form.password} />
-      <Button type='submit' className={'mt-2 bg-rose-400 text-white shadow-md mx-auto'}
-              disabled={!form.email.valid || !form.password.valid}>Login</Button>
+      <Input type="email" label="Email" {...form.email} />
+      <Input type="password" label="Password" {...form.password} />
+      <Button
+        type="submit"
+        className={'mt-2 bg-rose-400 text-white shadow-md mx-auto'}
+        disabled={!form.email.valid || !form.password.valid}
+      >
+        Login
+      </Button>
     </Container>
   );
 };
