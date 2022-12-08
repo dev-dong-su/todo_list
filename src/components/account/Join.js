@@ -3,21 +3,24 @@ import Button from '../common/Button';
 import tw from 'tailwind-styled-components';
 import useInput from '../../hooks/useInput';
 import { join } from '../../apis/auth';
-import useSubmit from '../../hooks/useSubmit';
+import useRequest from '../../hooks/useRequest';
+import { useNavigate } from 'react-router-dom';
 
 const Container = tw.form`flex flex-col w-10/12 h-full justify-center items-center rounded-xl`;
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const form = {
     email: useInput({
       initialValue: '',
       errorMessage: '이메일 형식이 올바르지 않습니다.',
-      pattern: '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$',
+      pattern: 'email',
       required: true,
     }),
     password: useInput({
       initialValue: '',
-      pattern: '^(?=.*[a-zA-Z])(?=.*).{8,25}$',
+      pattern: 'password',
       errorMessage: '비밀번호가 8자 이상인지 확인해 주세요.',
       required: true,
     }),
@@ -28,13 +31,24 @@ const Register = () => {
     }),
   };
 
-  const { onSubmit } = useSubmit({
-    submitFunction: join,
-    formData: { email: form.email.value, password: form.password.value },
-  });
+  const { handleRequest } = useRequest();
+
+  const action = (response) => {
+    alert('회원가입 성공!');
+    navigate('/');
+  };
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    handleRequest({
+      submitFunction: join,
+      formData: { email: form.email.value, password: form.password.value },
+      action,
+    });
+  };
 
   return (
-    <Container onSubmit={onSubmit}>
+    <Container onSubmit={handleOnSubmit}>
       <Input type='email' label='Email' {...form.email} />
       <Input type='password' label='Password' {...form.password} />
       <Input type='password' label='Password Check' {...form.pwdCheck} pattern={form.password.value} />
