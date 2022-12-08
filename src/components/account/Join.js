@@ -1,3 +1,4 @@
+<<<<<<< work/Account
 import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
 import { join } from '../../apis/auth';
@@ -9,6 +10,19 @@ import Input from '../common/Input';
 const Container = tw.form`flex flex-col w-10/12 h-full justify-center items-center rounded-xl`;
 
 const Join = () => {
+=======
+import Input from '../common/Input';
+import Button from '../common/Button';
+import tw from 'tailwind-styled-components';
+import useInput from '../../hooks/useInput';
+import { join } from '../../apis/auth';
+import useRequest from '../../hooks/useRequest';
+import { useNavigate } from 'react-router-dom';
+
+const Container = tw.form`flex flex-col w-10/12 h-full justify-center items-center rounded-xl`;
+
+const Register = () => {
+>>>>>>> main
   const navigate = useNavigate();
 
   const form = {
@@ -33,12 +47,20 @@ const Join = () => {
 
   const { handleRequest } = useRequest();
 
+<<<<<<< work/Account
   const action = response => {
+=======
+  const action = (response) => {
+>>>>>>> main
     alert('회원가입 성공!');
     navigate('/');
   };
 
+<<<<<<< work/Account
   const handleOnSubmit = event => {
+=======
+  const handleOnSubmit = (event) => {
+>>>>>>> main
     event.preventDefault();
     handleRequest({
       submitFunction: join,
@@ -49,6 +71,7 @@ const Join = () => {
 
   return (
     <Container onSubmit={handleOnSubmit}>
+<<<<<<< work/Account
       <Input type="email" label="Email" {...form.email} />
       <Input type="password" label="Password" {...form.password} />
       <Input type="password" label="Password Check" {...form.pwdCheck} pattern={form.password.value} />
@@ -64,3 +87,14 @@ const Join = () => {
 };
 
 export default Join;
+=======
+      <Input type='email' label='Email' {...form.email} />
+      <Input type='password' label='Password' {...form.password} />
+      <Input type='password' label='Password Check' {...form.pwdCheck} pattern={form.password.value} />
+      <Button type='submit' className={'mt-1 bg-rose-400 text-white shadow-md mx-auto'}
+              disabled={!form.email.valid || !form.password.valid || !form.pwdCheck.valid}>Join</Button>
+    </Container>);
+};
+
+export default Register;
+>>>>>>> main

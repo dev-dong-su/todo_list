@@ -14,7 +14,11 @@ const useLocalStorage = (key, initialValue) => {
     }
   });
 
+<<<<<<< work/Account
   const setValue = value => {
+=======
+  const setValue = (value) => {
+>>>>>>> main
     try {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
       setStoredValue(pre => valueToStore);
@@ -27,6 +31,12 @@ const useLocalStorage = (key, initialValue) => {
     }
   };
   return { storedValue, setValue };
+<<<<<<< work/Account
 };
 
 export default useLocalStorage;
+=======
+}
+
+export default useLocalStorage;
+>>>>>>> main

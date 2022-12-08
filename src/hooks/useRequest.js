@@ -7,7 +7,6 @@ const useRequest = () => {
         action(response);
       })
       .catch(handleError);
-
   return {
     handleRequest,
   };
