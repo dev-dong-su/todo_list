@@ -11,10 +11,10 @@ peer-focus:text-rose-400`;
 
 const ErrorMessage = tw.span`text-rose-400 text-sm ml-2`;
 
-const Input = ({ type, label, errorMessage, valid, ...rest}) => {
+const Input = ({ type, label, errorMessage, valid, ...rest }) => {
   return (
     <Container>
-      <StyledInput type={type} placeholder='' {...rest} />
+      <StyledInput type={type} placeholder="" {...rest} />
       <StyledLabel>{label}</StyledLabel>
       {!valid && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Container>
