@@ -2,7 +2,7 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 import tw from 'tailwind-styled-components';
 import useInput from '../../hooks/useInput';
-import { join } from '../../Apis/auth';
+import { join } from '../../apis/auth';
 import useSubmit from '../../hooks/useSubmit';
 
 const Container = tw.form`flex flex-col w-10/12 h-full justify-center items-center rounded-xl`;

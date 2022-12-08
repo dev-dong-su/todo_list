@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { RadioContext } from '../../Contexts/RadioContext';
+import { RadioContext } from '../../contexts/RadioContext';
 import tw from 'tailwind-styled-components';
 
 const Label = tw.div`text-slate-600 transition ease-in duration-100

@@ -1,4 +1,4 @@
-import { RadioContext } from '../Contexts/RadioContext';
+import { RadioContext } from '../contexts/RadioContext';
 
 const RadioGroup = ({ children, ...rest}) => {
   return (
