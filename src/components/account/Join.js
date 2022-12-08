@@ -54,7 +54,7 @@ const Join = () => {
       <Input type="password" label="Password Check" {...form.pwdCheck} pattern={form.password.value} />
       <Button
         type="submit"
-        className={'mt-1 bg-rose-400 text-white shadow-md mx-auto'}
+        className={'mt-1 bg-rose-400 text-white shadow-md mx-auto w-24 h-12'}
         disabled={!form.email.valid || !form.password.valid || !form.pwdCheck.valid}
       >
         Join

@@ -1,12 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+import { login } from '../../apis/auth';
+import useInput from '../../hooks/useInput';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import useRequest from '../../hooks/useRequest';
 import Button from '../common/Button';
 import Input from '../common/Input';
-import useInput from '../../hooks/useInput';
-import useRequest from '../../hooks/useRequest';
-import { login } from '../../apis/auth';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { useNavigate } from 'react-router-dom';
 
 const Container = tw.form`flex flex-col w-10/12 h-full justify-center pb-10 items-center rounded-xl gap-4`;
 
@@ -52,7 +52,7 @@ const Login = () => {
       <Input type="password" label="Password" {...form.password} />
       <Button
         type="submit"
-        className={'mt-2 bg-rose-400 text-white shadow-md mx-auto'}
+        className={'mt-2 bg-rose-400 text-white shadow-md mx-auto w-24 h-12'}
         disabled={!form.email.valid || !form.password.valid}
       >
         Login
