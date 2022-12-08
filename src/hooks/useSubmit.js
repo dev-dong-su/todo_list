@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { handleError } from '../Apis';
+import { handleError } from '../apis';
 
 const useSubmit = ({ submitFunction, formData }) => {
   const [loading, setLoading] = useState(false);

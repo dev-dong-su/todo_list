@@ -1,5 +1,5 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import AccountPage from "./Pages/AccountPage";
+import AccountPage from "./pages/AccountPage";
 
 const router = createBrowserRouter([
   {
