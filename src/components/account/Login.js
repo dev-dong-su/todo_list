@@ -30,19 +30,18 @@ const Login = () => {
 
   const { setValue } = useLocalStorage('access_token');
 
-  const action = response => {
-    setValue(response.data['access_token']);
-    navigate('/todo');
-  };
-
   const { handleRequest } = useRequest();
 
   const handleOnSubmit = event => {
+    const loginInit = response => {
+      setValue(response.data['access_token']);
+      navigate('/todo');
+    };
     event.preventDefault();
     handleRequest({
       submitFunction: login,
       formData: { email: form.email.value, password: form.password.value },
-      action,
+      action: loginInit,
     });
   };
 

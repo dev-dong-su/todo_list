@@ -33,17 +33,16 @@ const Join = () => {
 
   const { handleRequest } = useRequest();
 
-  const action = response => {
-    alert('회원가입 성공!');
-    navigate('/');
-  };
-
   const handleOnSubmit = event => {
+    const joinInit = response => {
+      alert('회원가입 성공!');
+      navigate('/');
+    };
     event.preventDefault();
     handleRequest({
       submitFunction: join,
       formData: { email: form.email.value, password: form.password.value },
-      action,
+      action: joinInit,
     });
   };
 
