@@ -6,11 +6,9 @@ const useInput = ({ initialValue, errorMessage, required, pattern }) => {
   const [valid, setValid] = useState(false);
   const getPattern = useMemo(() => Validations(pattern), [pattern]);
 
-
-  const handleChange = (event) => {
-    event.target.value.match(getPattern) ?
-      setValid((pre) => true) : setValid((pre) => false);
-    setValue((pre) => event.target.value);
+  const handleChange = event => {
+    event.target.value.match(getPattern) ? setValid(pre => true) : setValid(pre => false);
+    setValue(pre => event.target.value);
   };
 
   return {

@@ -8,11 +8,12 @@ import useRequest from '../../hooks/useRequest';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
-const Container = tw.form`flex flex-col w-10/12 h-full justify-center pb-10 items-center rounded-xl gap-4`;
+const Container = tw.form`flex flex-col w-10/12 h-full justify-center pb-10 items-center rounded-xl gap-6`;
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const { setValue } = useLocalStorage('access_token');
+  const { handleRequest } = useRequest();
   const form = {
     email: useInput({
       initialValue: '',
@@ -28,21 +29,14 @@ const Login = () => {
     }),
   };
 
-  const { setValue } = useLocalStorage('access_token');
-
-  const action = response => {
-    setValue(response.data['access_token']);
-    navigate('/todo');
-  };
-
-  const { handleRequest } = useRequest();
-
   const handleOnSubmit = event => {
     event.preventDefault();
     handleRequest({
       submitFunction: login,
       formData: { email: form.email.value, password: form.password.value },
-      action,
+    }).then(response => {
+      setValue(response.data['access_token']);
+      navigate('/todo');
     });
   };
 
