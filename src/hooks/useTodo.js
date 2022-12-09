@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createTodo, deleteTodo, getTodo, updateTodo } from '../apis/auth';
 import useLocalStorage from './useLocalStorage';
 import useRequest from './useRequest';
 
 const useTodo = () => {
+  const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const { handleRequest } = useRequest();
-  const { storedValue } = useLocalStorage('access_token');
+  const { storedValue, deleteValue } = useLocalStorage('access_token');
 
   useEffect(() => {
     handleGetTodo();
@@ -36,11 +38,17 @@ const useTodo = () => {
     handleRequest({ submitFunction: deleteTodo, formData: { id: id, accessToken: storedValue } }).then(handleGetTodo);
   };
 
+  const handleLogOut = () => {
+    deleteValue();
+    navigate('/');
+  };
+
   return {
     todos,
     handleCreateToDo,
     handleUpdateTodo,
     handleDeleteTodo,
+    handleLogOut,
   };
 };
 

@@ -16,7 +16,7 @@ const Content = tw.div`flex flex-col items-center rounded-xl w-11/12 h-full bg-s
 const InputContainer = tw.form`flex flex-row w-10/12 mt-2 mb-3 justify-center items-center rounded-xl gap-1`;
 
 const Todo = () => {
-  const { todos, handleCreateToDo, handleUpdateTodo, handleDeleteTodo } = useTodo();
+  const { todos, handleCreateToDo, handleUpdateTodo, handleDeleteTodo, handleLogOut } = useTodo();
   const todoInput = useInput({
     initialValue: '',
     required: true,
@@ -27,11 +27,15 @@ const Todo = () => {
     handleCreateToDo(todoInput.value);
   };
 
+  const handleOnClick = () => {
+    handleLogOut();
+  };
+
   return (
     <Container>
       <Header>
         <Title>Todo</Title>
-        <Button className={'shadow-none text-rose-400 font-extrabold p-0 text-xl'}>
+        <Button className={'shadow-none text-rose-400 font-extrabold p-0 text-xl'} onClick={handleOnClick}>
           <LogOut color={'#fb7185'} props={'w-9 h-9'} />
         </Button>
       </Header>
