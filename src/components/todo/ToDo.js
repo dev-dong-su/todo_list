@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
+import { createTodo, getTodo } from '../../apis/auth';
 import useInput from '../../hooks/useInput';
-import useTodo from '../../hooks/useTodo';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import useRequest from '../../hooks/useRequest';
 import Button from '../common/Button';
 import Container from '../common/Container';
 import Input from '../common/Input';
@@ -15,12 +18,34 @@ const Content = tw.div`flex flex-col items-center rounded-xl`;
 const InputContainer = tw.form`flex flex-row w-11/12 mt-2 mb-3 justify-center items-center rounded-xl gap-1`;
 
 const Todo = () => {
+  const [state, setState] = useState([]);
+  const { handleRequest } = useRequest();
+  const { storedValue } = useLocalStorage('access_token');
   const todoInput = useInput({
     initialValue: '',
     required: true,
   });
 
-  const { state } = useTodo();
+  useEffect(() => {
+    const initTodo = response => {
+      setState(response['data']);
+    };
+    handleRequest({ submitFunction: getTodo, formData: storedValue, action: initTodo });
+  }, []);
+
+  useEffect(() => {}, [state]);
+
+  const handleOnSubmit = event => {
+    const addTodo = response => {
+      setState([...state, response['data']]);
+    };
+    event.preventDefault();
+    handleRequest({
+      submitFunction: createTodo,
+      formData: { todo: todoInput.value, accessToken: storedValue },
+      action: addTodo,
+    });
+  };
 
   return (
     <Container>
@@ -39,7 +64,7 @@ const Todo = () => {
           />
         ))}
       </Content>
-      <InputContainer>
+      <InputContainer onSubmit={handleOnSubmit}>
         <Input type="text" {...todoInput} />
         <Button type="submit" className={'bg-rose-400 text-white shadow-md mx-auto w-24 h-12'}>
           Send
