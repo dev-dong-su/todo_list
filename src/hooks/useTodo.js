@@ -1,29 +1,46 @@
 import { useEffect, useState } from 'react';
-import { createTodo, getTodo } from '../apis/auth';
+import { createTodo, deleteTodo, getTodo, updateTodo } from '../apis/auth';
 import useLocalStorage from './useLocalStorage';
 import useRequest from './useRequest';
 
 const useTodo = () => {
-  const [state, setState] = useState([]);
+  const [todos, setTodos] = useState([]);
   const { handleRequest } = useRequest();
   const { storedValue } = useLocalStorage('access_token');
 
   useEffect(() => {
-    handleRequest({ submitFunction: getTodo, formData: storedValue }).then(response => {
-      setState(response['data']);
-    });
+    handleGetTodo();
   }, []);
+
+  const handleGetTodo = () => {
+    handleRequest({ submitFunction: getTodo, formData: storedValue }).then(response => {
+      setTodos(response['data']);
+    });
+  };
 
   const handleCreateToDo = todo => {
     handleRequest({
       submitFunction: createTodo,
       formData: { todo: todo, accessToken: storedValue },
-    }).then(response => setState([...state, response['data']]));
+    }).then(handleGetTodo());
+  };
+
+  const handleUpdateTodo = todo => {
+    handleRequest({
+      submitFunction: updateTodo,
+      formData: { ...todo, accessToken: storedValue },
+    }).then(handleGetTodo);
+  };
+
+  const handleDeleteTodo = id => {
+    handleRequest({ submitFunction: deleteTodo, formData: { id: id, accessToken: storedValue } }).then(handleGetTodo);
   };
 
   return {
-    state,
+    todos,
     handleCreateToDo,
+    handleUpdateTodo,
+    handleDeleteTodo,
   };
 };
 

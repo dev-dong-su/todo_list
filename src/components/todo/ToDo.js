@@ -10,12 +10,12 @@ const Header = tw.div`flex flex-row mt-1 w-11/12 justify-between items-end`;
 
 const Title = tw.h2`font-extrabold text-4xl text-rose-400`;
 
-const Content = tw.div`flex flex-col items-center rounded-xl w-11/12 h-full bg-slate-100 overflow-scroll`;
+const Content = tw.div`flex flex-col items-center rounded-xl w-11/12 h-full bg-slate-100 overflow-scroll gap-3`;
 
 const InputContainer = tw.form`flex flex-row w-11/12 mt-2 mb-3 justify-center items-center rounded-xl gap-1`;
 
 const Todo = () => {
-  const { state, handleCreateToDo } = useTodo();
+  const { todos, handleCreateToDo, handleUpdateTodo, handleDeleteTodo } = useTodo();
   const todoInput = useInput({
     initialValue: '',
     required: true,
@@ -33,13 +33,12 @@ const Todo = () => {
         <Button className={'shadow-none text-rose-400 font-extrabold p-0 text-xl'}>Logout</Button>
       </Header>
       <Content>
-        {state.map(todoData => (
+        {todos.map(todoData => (
           <TodoCard
             key={todoData.id}
-            id={todoData.id}
-            isCompleted={todoData.isCompleted}
-            userId={todoData.userId}
-            todo={todoData.todo}
+            {...todoData}
+            handleUpdateTodo={handleUpdateTodo}
+            handleDeleteTodo={handleDeleteTodo}
           />
         ))}
       </Content>

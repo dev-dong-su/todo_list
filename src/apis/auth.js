@@ -9,6 +9,12 @@ export const createTodo = ({ todo, accessToken }) =>
 
 export const getTodo = accessToken => client.get('/todos', { headers: { Authorization: `Bearer ${accessToken}` } });
 
-export const updateTodo = ({ id, todo, isCompleted }) => client.put(`/todos/${id}`, {});
+export const updateTodo = formData =>
+  client.put(
+    `/todos/${formData.id}`,
+    { todo: formData.todo, isCompleted: formData.isCompleted },
+    { headers: { Authorization: `Bearer ${formData.accessToken}` } },
+  );
 
-export const deleteTodo = ({ id, todo, isCompleted }) => client.put(`/todos/${id}`, {});
+export const deleteTodo = formData =>
+  client.delete(`/todos/${formData.id}`, { headers: { Authorization: `Bearer ${formData.accessToken}` } });
