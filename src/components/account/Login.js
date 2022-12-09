@@ -12,7 +12,8 @@ const Container = tw.form`flex flex-col w-10/12 h-full justify-center pb-10 item
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const { setValue } = useLocalStorage('access_token');
+  const { handleRequest } = useRequest();
   const form = {
     email: useInput({
       initialValue: '',
@@ -28,20 +29,14 @@ const Login = () => {
     }),
   };
 
-  const { setValue } = useLocalStorage('access_token');
-
-  const { handleRequest } = useRequest();
-
   const handleOnSubmit = event => {
-    const loginInit = response => {
-      setValue(response.data['access_token']);
-      navigate('/todo');
-    };
     event.preventDefault();
     handleRequest({
       submitFunction: login,
       formData: { email: form.email.value, password: form.password.value },
-      action: loginInit,
+    }).then(response => {
+      setValue(response.data['access_token']);
+      navigate('/todo');
     });
   };
 

@@ -10,7 +10,7 @@ const Container = tw.form`flex flex-col w-10/12 h-full justify-center items-cent
 
 const Join = () => {
   const navigate = useNavigate();
-
+  const { handleRequest } = useRequest();
   const form = {
     email: useInput({
       initialValue: '',
@@ -31,18 +31,14 @@ const Join = () => {
     }),
   };
 
-  const { handleRequest } = useRequest();
-
   const handleOnSubmit = event => {
-    const joinInit = response => {
-      alert('회원가입 성공!');
-      navigate('/');
-    };
     event.preventDefault();
     handleRequest({
       submitFunction: join,
       formData: { email: form.email.value, password: form.password.value },
-      action: joinInit,
+    }).then(response => {
+      alert('회원가입 성공!');
+      navigate('/');
     });
   };
 

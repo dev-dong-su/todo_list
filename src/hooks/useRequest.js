@@ -1,12 +1,7 @@
 import { handleError } from '../apis';
 
 const useRequest = () => {
-  const handleRequest = ({ submitFunction, formData, action }) =>
-    submitFunction(formData)
-      .then(response => {
-        action(response);
-      })
-      .catch(handleError);
+  const handleRequest = ({ submitFunction, formData }) => submitFunction(formData).catch(handleError);
   return {
     handleRequest,
   };
