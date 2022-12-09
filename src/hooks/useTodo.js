@@ -22,7 +22,7 @@ const useTodo = () => {
     handleRequest({
       submitFunction: createTodo,
       formData: { todo: todo, accessToken: storedValue },
-    }).then(handleGetTodo());
+    }).then(handleGetTodo);
   };
 
   const handleUpdateTodo = todo => {
