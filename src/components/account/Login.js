@@ -8,7 +8,7 @@ import useRequest from '../../hooks/useRequest';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
-const Container = tw.form`flex flex-col w-10/12 h-full justify-center pb-10 items-center rounded-xl gap-4`;
+const Container = tw.form`flex flex-col w-10/12 h-full justify-center pb-10 items-center rounded-xl gap-6`;
 
 const Login = () => {
   const navigate = useNavigate();

@@ -6,7 +6,7 @@ import useRequest from '../../hooks/useRequest';
 import Button from '../common/Button';
 import Input from '../common/Input';
 
-const Container = tw.form`flex flex-col w-10/12 h-full justify-center items-center rounded-xl`;
+const Container = tw.form`flex flex-col w-10/12 h-full justify-center items-center rounded-xl gap-4`;
 
 const Join = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Join = () => {
       <Input type="password" label="Password Check" {...form.pwdCheck} pattern={form.password.value} />
       <Button
         type="submit"
-        className={'mt-1 bg-rose-400 text-white shadow-md mx-auto w-24 h-12'}
+        className={'bg-rose-400 text-white shadow-md mx-auto w-24 h-12'}
         disabled={!form.email.valid || !form.password.valid || !form.pwdCheck.valid}
       >
         Join
