@@ -34,9 +34,10 @@ const Login = () => {
     handleRequest({
       submitFunction: login,
       formData: { email: form.email.value, password: form.password.value },
-    }).then(response => {
-      setValue(response.data['access_token']);
-      navigate('/todo');
+      action: response => {
+        setValue(response.data['access_token']);
+        navigate('/todo');
+      },
     });
   };
 
