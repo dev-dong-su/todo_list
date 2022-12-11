@@ -9,7 +9,6 @@
 2. [실행 방법](#실행방법)
 3. [Demo](#demo)
 4. [과제 요약](#요약)
-5. [사용 페키지]()
 # 사용 라이브러리
 * `tailwindcss`
 * `tailwindcss-styled-component`
