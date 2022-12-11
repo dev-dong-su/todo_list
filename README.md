@@ -5,10 +5,10 @@
 
 
 ## 목차
-1. [사용 라이브러리](#과제)
+1. [사용 라이브러리](#사용-라이브러리)
 2. [실행 방법](#실행방법)
 3. [Demo](#demo)
-4. [과제 요약](#요약)
+4. [요약](#요약)
 # 사용 라이브러리
 * `tailwindcss`
 * `tailwindcss-styled-component`
@@ -21,7 +21,7 @@ yarn start
 # Demo
 * https://wanted-pre-onboarding-frontend-drab.vercel.app/
 
-# 과제 요약
+# 요약
 ```
 src/
 ├── App.js
